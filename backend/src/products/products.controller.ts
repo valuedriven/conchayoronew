@@ -36,12 +36,16 @@ export class ProductsController {
     @Param('id') id: string,
     @Body() updateProductDto: UpdateProductDto,
   ): Promise<void> {
-    console.log('passei aqui...');
     return this.productsService.update(id, updateProductDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string): Promise<void> {
     return this.productsService.remove(id);
+  }
+
+  @Get()
+  findByCriteria(@Body() criteria: any): Promise<Product[]> {
+    return this.productsService.findByCriteria(criteria);
   }
 }
