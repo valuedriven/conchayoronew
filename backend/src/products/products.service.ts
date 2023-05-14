@@ -38,7 +38,10 @@ export class ProductsService {
     await product.destroy();
   }
 
-  async update(id: string, updateProductDto: UpdateProductDto): Promise<void> {
+  async update(
+    id: string,
+    updateProductDto: UpdateProductDto,
+  ): Promise<Product> {
     const product = await this.findOne(id);
     const productUpdated = {
       name: updateProductDto.name,
@@ -47,6 +50,7 @@ export class ProductsService {
       rating: updateProductDto.rating,
     };
     await product.update(productUpdated);
+    return product;
   }
 
   async findByCriteria(criteria: any): Promise<Product[]> {
