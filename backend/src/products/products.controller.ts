@@ -44,6 +44,7 @@ export class ProductsController {
     return this.productsService.remove(id);
   }
 
+  controller;
   @Get()
   findByCriteria(@Body() criteria: any): Promise<Product[]> {
     return this.productsService.findByCriteria(criteria);
