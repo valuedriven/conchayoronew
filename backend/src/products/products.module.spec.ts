@@ -14,17 +14,17 @@ const databaseConnection: SequelizeModuleOptions = {
 };
 
 const createProductDto: CreateProductDto = {
-  name: 'Product1-updated',
-  price: 11,
-  category: 'C2',
-  rating: 2,
-};
-
-const updateProductDto: UpdateProductDto = {
   name: 'Product1',
   price: 10,
   category: 'C1',
   rating: 1,
+};
+
+const updateProductDto: UpdateProductDto = {
+  name: 'Product1-updated',
+  price: 11,
+  category: 'C2',
+  rating: 2,
 };
 
 describe('ProductsModule', () => {
