@@ -49,10 +49,8 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: ebconfig
-          path: |
-              backend/.elasticbeanstalk/config.yml
-              backend/Dockerrun.aws.json
-      - run: ls -la
+          path: .
+      - run: ls -laR
       - run: |
           sed -i='' "s/<AWS_ACCOUNT_ID>/$AWS_ACCOUNT_ID/" backend/Dockerrun.aws.json
           sed -i='' "s/<PROJECT_NAME>/$PROJECT_NAME/" backend/Dockerrun.aws.json
