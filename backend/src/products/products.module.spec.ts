@@ -29,23 +29,22 @@ const updateProductDto: UpdateProductDto = {
 
 describe('ProductsModule', () => {
   let app: INestApplication;
-
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [SequelizeModule.forRoot(databaseConnection), ProductsModule],
     }).compile();
-
     app = moduleFixture.createNestApplication();
     await app.init();
   });
-
   it('GET /products', async () => {
     return request(await app.getHttpServer())
       .get('/products')
       .expect(200)
       .expect('[]');
   });
-
+  afterAll(async () => {
+    await app.close();
+  });
   it('POST /products', async () => {
     return request(await app.getHttpServer())
       .post('/products')
@@ -59,7 +58,6 @@ describe('ProductsModule', () => {
         res.body.rating = createProductDto.rating;
       });
   });
-
   it('PUT /products', async () => {
     const response = request(await app.getHttpServer())
       .post('/products')
@@ -95,9 +93,5 @@ describe('ProductsModule', () => {
       .expect((res) => {
         res.body = null;
       });
-  });
-
-  afterAll(async () => {
-    await app.close();
   });
 });

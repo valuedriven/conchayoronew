@@ -1,3 +1,9 @@
+import { ConfigService } from '@nestjs/config';
+import { AppLoggerService } from 'src/core/logger.service';
+
+const logger = new AppLoggerService(new ConfigService());
+logger.setContext('Sequelize');
+
 export default () => ({
   port: process.env.PORT,
   database: {
@@ -14,5 +20,6 @@ export default () => ({
     define: {
       timestamps: process.env.DB_TIMESTAMPS || true,
     },
+    logging: (msg) => logger.log(msg),
   },
 });

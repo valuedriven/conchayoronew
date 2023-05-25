@@ -3,14 +3,12 @@ import { InjectModel } from '@nestjs/sequelize';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
-
 @Injectable()
 export class ProductsService {
   constructor(
     @InjectModel(Product)
     private readonly productModel: typeof Product,
   ) {}
-
   create(createProductDto: CreateProductDto): Promise<Product> {
     const product = {
       name: createProductDto.name,
@@ -20,11 +18,9 @@ export class ProductsService {
     };
     return this.productModel.create(product);
   }
-
   async findAll(): Promise<Product[]> {
     return this.productModel.findAll();
   }
-
   findOne(id: string): Promise<Product> {
     return this.productModel.findOne({
       where: {
@@ -32,12 +28,10 @@ export class ProductsService {
       },
     });
   }
-
   async remove(id: string): Promise<void> {
     const product = await this.findOne(id);
     await product.destroy();
   }
-
   async update(
     id: string,
     updateProductDto: UpdateProductDto,
@@ -52,7 +46,6 @@ export class ProductsService {
     await product.update(productUpdated);
     return product;
   }
-
   async findByCriteria(criteria: any): Promise<Product[]> {
     return this.productModel.findAll({
       where: criteria,
