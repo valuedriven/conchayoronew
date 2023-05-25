@@ -50,9 +50,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install awsebcli
       - run: |
-          
+          sed -i='' "s/<AWS_ACCOUNT_ID>/$AWS_ACCOUNT_ID/" backend/Dockerrun.aws.json
+          sed -i='' "s/<MODULE_NAME>/$MODULE_NAME/" backend/Dockerrun.aws.json
+          sed -i='' "s/<TAG>/$TAG/" backend/Dockerrun.aws.json
       - run: |
            cd backend 
            eb deploy
-      
       
